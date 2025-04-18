@@ -1,3 +1,7 @@
+import os
+
+# Download https://graphviz.org/download lalu tambahkan env variables PATH
+# install graphviz via pip
 from graphviz import Digraph
 
 class Node:
@@ -38,7 +42,10 @@ root = None
 for num in data:
     root = insert(root, num)
 
-bst_graph = visualize_bst(root)
-bst_graph.render("bst_output", format="png", cleanup=False)  # hasil akan disimpan di 'bst_output.png'
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_PATH = os.path.join(CURRENT_DIR, "out\\bst_output")
 
-print("✅ BST berhasil divisualisasikan! Lihat file 'bst_output.png'")
+bst_graph = visualize_bst(root)
+bst_graph.render(OUTPUT_PATH, format="png", cleanup=False)  # hasil akan disimpan di 'out/bst_output.png'
+
+print(f"✅ BST berhasil divisualisasikan! Lihat file '{OUTPUT_PATH}'")
