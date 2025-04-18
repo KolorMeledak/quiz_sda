@@ -32,16 +32,23 @@ def postorder(root, result):
         postorder(root.right, result)
         result.append(root.val)
 
-data = [155, 142, 85, 176, 78, 36, 32, 59, 37, 169, 38, 55, 62, 68, 49, 69, 91]
-bst_root = None
-for num in data:
-    bst_root = insert(bst_root, num)
+if __name__ == "__main__":
+    raw_input = input("Masukkan angka-angka (pisahkan dengan koma): ")
+    try:
+        data = [int(x.strip()) for x in raw_input.split(',') if x.strip()]
+    except ValueError:
+        print("⚠️ Input harus berupa angka yang dipisahkan koma.")
+        exit()
 
-pre, ino, post = [], [], []
-preorder(bst_root, pre)
-inorder(bst_root, ino)
-postorder(bst_root, post)
+    bst_root = None
+    for num in data:
+        bst_root = insert(bst_root, num)
 
-print("a) Preorder Traversal :", pre)
-print("b) Inorder Traversal  :", ino)
-print("c) Postorder Traversal:", post)
+    pre, ino, post = [], [], []
+    preorder(bst_root, pre)
+    inorder(bst_root, ino)
+    postorder(bst_root, post)
+
+    print("a) Preorder Traversal :", pre)
+    print("b) Inorder Traversal  :", ino)
+    print("c) Postorder Traversal:", post)

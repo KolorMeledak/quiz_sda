@@ -36,16 +36,24 @@ def visualize_bst(root):
     add_nodes_edges(root)
     return dot
 
-data = [155, 142, 85, 176, 78, 36, 32, 59, 37, 169, 38, 55, 62, 68, 49, 69, 91]
+def build_bst_from_list(data):
+    root = None
+    for num in data:
+        root = insert(root, num)
+    return root
 
-root = None
-for num in data:
-    root = insert(root, num)
+def save_bst_image(root, output_path):
+    bst_graph = visualize_bst(root)
+    bst_graph.render(output_path, format="png", cleanup=False) # hasil akan disimpan di 'out/bst_output.png'
+    print(f"✅ BST berhasil divisualisasikan! Lihat file '{output_path}.png'")
 
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_PATH = os.path.join(CURRENT_DIR, "out\\bst_output")
+if __name__ == "__main__":
+    input_str = input("Masukkan angka (pisahkan dengan koma): ")
+    data = [int(x.strip()) for x in input_str.split(',') if x.strip().isdigit()]
 
-bst_graph = visualize_bst(root)
-bst_graph.render(OUTPUT_PATH, format="png", cleanup=False)  # hasil akan disimpan di 'out/bst_output.png'
+    root = build_bst_from_list(data)
 
-print(f"✅ BST berhasil divisualisasikan! Lihat file '{OUTPUT_PATH}'")
+    CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+    OUTPUT_PATH = os.path.join(CURRENT_DIR, "out", "bst_output")
+
+    save_bst_image(root, OUTPUT_PATH)
