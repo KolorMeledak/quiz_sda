@@ -36,56 +36,59 @@ def selection_sort(arr):
         print(f"Langkah {i}: {a}")
     print(f"Hasil akhir Selection Sort: {a}")
     
-def quick_sort_with_steps(arr, low, high):
-    a = arr.copy() 
+def quick_sort_with_steps(arr):
+    a = arr.copy()
+    low = 0
+    high = len(a) - 1
 
-    def _quick_sort(a, low, high):
+    def quick_sort(a, low, high):
         if low < high:
             pivot_index = partition(a, low, high)
-            _quick_sort(a, low, pivot_index)
-            _quick_sort(a, pivot_index + 1, high)
+            quick_sort(a, low, pivot_index)
+            quick_sort(a, pivot_index + 1, high)
 
     def partition(arr, low, high):
-        pivot = arr[low]
-        print(f"\nMulai partition: {arr[low:high+1]} | Pivot: {pivot}")
+        print(f"\nMulai partition: {arr[low:high+1]}")
         i = low - 1
         j = high + 1
 
         while True:
             # i ke kanan
             i += 1
-            while arr[i] < pivot:
+            while arr[i] < arr[low]:
                 i += 1
 
             # j ke kiri
             j -= 1
-            while arr[j] > pivot:
+            while arr[j] > arr[low]:
                 j -= 1
 
-            print(f"  Pointer i di index {i} ({arr[i]}), j di index {j} ({arr[j]})")
+            print(f"  i = {i} ({arr[i]}), j = {j} ({arr[j]})")
 
             if i >= j:
-                print(f"  i dan j bertemu/silang → return j = {j}")
+                print(f"  → i >= j, return {j}")
                 return j
 
-            # tukar elemen
             print(f"  Tukar arr[{i}] = {arr[i]} dan arr[{j}] = {arr[j]}")
             arr[i], arr[j] = arr[j], arr[i]
-            print(f"  Setelah tukar : {arr}")
+            print(f"  Setelah tukar: {arr}")
 
-    _quick_sort(a, low, high)
+    print("Proses Quick Sort:")
+    quick_sort(a, low, high)
     print("\nHasil akhir Quick Sort:", a)
-    return a
+
 
 if __name__ == "__main__":
-    raw_input = input("Masukkan angka-angka (pisahkan dengan koma): ")
-    try:
-        data = [int(x.strip()) for x in raw_input.split(',') if x.strip()]
-    except ValueError:
-        print("⚠️ Input harus berupa angka yang dipisahkan koma.")
-        exit()
+    # raw_input = input("Masukkan angka-angka (pisahkan dengan koma): ")
+    # try:
+    #     data = [int(x.strip()) for x in raw_input.split(',') if x.strip()]
+    # except ValueError:
+    #     print("⚠️ Input harus berupa angka yang dipisahkan koma.")
+    #     exit()
 
-    bubble_sort(data)
-    insertion_sort(data)
-    selection_sort(data)
-    quick_sort_with_steps(data, 0, len(data) - 1)
+    data = [4,5,7,6,8,7,5,7]
+
+    # bubble_sort(data)
+    # insertion_sort(data)
+    # selection_sort(data)
+    quick_sort_with_steps(data)
