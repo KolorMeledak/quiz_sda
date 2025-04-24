@@ -35,6 +35,47 @@ def selection_sort(arr):
         a[i], a[min_idx] = a[min_idx], a[i]
         print(f"Langkah {i}: {a}")
     print(f"Hasil akhir Selection Sort: {a}")
+    
+def quick_sort_with_steps(arr, low, high):
+    a = arr.copy() 
+
+    def _quick_sort(a, low, high):
+        if low < high:
+            pivot_index = partition(a, low, high)
+            _quick_sort(a, low, pivot_index)
+            _quick_sort(a, pivot_index + 1, high)
+
+    def partition(arr, low, high):
+        pivot = arr[low]
+        print(f"\nMulai partition: {arr[low:high+1]} | Pivot: {pivot}")
+        i = low - 1
+        j = high + 1
+
+        while True:
+            # i ke kanan
+            i += 1
+            while arr[i] < pivot:
+                i += 1
+
+            # j ke kiri
+            j -= 1
+            while arr[j] > pivot:
+                j -= 1
+
+            print(f"  Pointer i di index {i} ({arr[i]}), j di index {j} ({arr[j]})")
+
+            if i >= j:
+                print(f"  i dan j bertemu/silang → return j = {j}")
+                return j
+
+            # tukar elemen
+            print(f"  Tukar arr[{i}] = {arr[i]} dan arr[{j}] = {arr[j]}")
+            arr[i], arr[j] = arr[j], arr[i]
+            print(f"  Setelah tukar : {arr}")
+
+    _quick_sort(a, low, high)
+    print("\nHasil akhir Quick Sort:", a)
+    return a
 
 if __name__ == "__main__":
     raw_input = input("Masukkan angka-angka (pisahkan dengan koma): ")
@@ -47,3 +88,4 @@ if __name__ == "__main__":
     bubble_sort(data)
     insertion_sort(data)
     selection_sort(data)
+    quick_sort_with_steps(data, 0, len(data) - 1)
