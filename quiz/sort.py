@@ -79,16 +79,22 @@ def quick_sort_with_steps(arr):
 
 
 if __name__ == "__main__":
-    # raw_input = input("Masukkan angka-angka (pisahkan dengan koma): ")
-    # try:
-    #     data = [int(x.strip()) for x in raw_input.split(',') if x.strip()]
-    # except ValueError:
-    #     print("⚠️ Input harus berupa angka yang dipisahkan koma.")
-    #     exit()
+    choice_input = input("Gunakan data default atau input manual? (d/m): ")
+    if choice_input == "d":
+        data = [5,5,7,6,8,7,4,7]
+    elif choice_input == "m":
+        raw_input = input("Masukkan angka-angka (pisahkan dengan koma): ")
+        try:
+            data = [int(x.strip()) for x in raw_input.split(',') if x.strip()]
+        except ValueError:
+            print("⚠️ Input harus berupa angka yang dipisahkan koma.")
+            exit()
+    else:
+        print("⚠️ Input tidak valid.")
+        exit()
+    
 
-    data = [4,5,7,6,8,7,5,7]
-
-    # bubble_sort(data)
-    # insertion_sort(data)
-    # selection_sort(data)
+    bubble_sort(data)
+    insertion_sort(data)
+    selection_sort(data)
     quick_sort_with_steps(data)
