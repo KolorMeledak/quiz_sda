@@ -77,6 +77,21 @@ def quick_sort_with_steps(arr):
     quick_sort(a, low, high)
     print("\nHasil akhir Quick Sort:", a)
 
+def in_place_sort(arr):
+    print("\nProses In Place Sort:")
+    a = arr.copy()
+    n = len(a)
+    for i in range(n):
+        max_el = max(a[0:n-i])
+        max_el_idx = a.index(max_el)
+        last_el = a[n-1-i]
+        if max_el > last_el:
+            a[n-1-i], a[max_el_idx] = max_el, last_el
+        
+        print(f"Langkah {i+1}: {a}")
+        
+    print(f"Hasil akhir In Place Sort: {a}")
+        
 
 if __name__ == "__main__":
     choice_input = input("Gunakan data default atau input manual? (d/m): ")
@@ -98,3 +113,4 @@ if __name__ == "__main__":
     insertion_sort(data)
     selection_sort(data)
     quick_sort_with_steps(data)
+    in_place_sort(data)
